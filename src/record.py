@@ -14,15 +14,19 @@ class Record():
 
     def initBlock(self):
         # read meta data from input sheet - record data has length of at least 1
-        data = pd.read_excel(f'../{Spec.SCHEMA}', sheet_name=self.sheet)
+        data = pd.read_excel(f'../{Spec.SCHEMA}', sheet_name=self.sheet, dtype=str)
         self.column_name = list(data.head())
+        
+        # store meta data
         self.meta_data = data.to_numpy()
+        self.meta_data[0] = self.meta_data[0].astype(int)
+
+        # record tracking variables
         self.field_count = len(self.meta_data[0])
         self.record_count = max(1, len(self.meta_data) - 1)
 
         # initialize record blocks
         self.blocks = np.empty([self.record_count, self.field_count], dtype=object)
-        self.meta_data[0] = self.meta_data[0].astype(int)
         for i in range(self.record_count):
             # init blocks
             for j in range(0, self.field_count):

@@ -39,13 +39,13 @@ class EmployeeRecord(Record):
 
     def fill(self):
         # extract indices of numeric fields
-        numeric_indices = np.hstack(np.array([np.arange(l,r+1) for l,r in self.amount_loc], dtype=object))
+        numeric_indices = np.hstack(np.array([np.arange(l,r+1) for l,r in self.amount_loc], dtype=object)).astype(int)
         
         # mask off numeric fields among input fields 
         field_indices = np.array(np.arange(0, self.field_count))
         text_indices_mask = np.ones(field_indices.shape, bool)
         text_indices_mask[numeric_indices] = False
-
+       
         # extract indices of text fields
         text_indices = field_indices[text_indices_mask] 
         
@@ -70,7 +70,7 @@ class EmployeeRecord(Record):
                 self.blocks[i][j] = np.chararray.rjust(str(amount), self.meta_data[0][j], fillchar='0')
                 self.total[j] += amount
 
-            # assert values on w2 (box1 to box7 only)
+            # assert values
             self.simpleCheck(i)
 
 if __name__ == "__main__":
