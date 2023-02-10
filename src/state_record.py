@@ -24,7 +24,7 @@ class StateRecord(EmployeeRecord):
         pass
 
 if __name__ == "__main__":
-    # Quick test on state total record class
+    # Quick test on state record class
     state = StateRecord()
     state.initBlock()
     state.fill()
