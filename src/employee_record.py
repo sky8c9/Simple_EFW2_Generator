@@ -35,7 +35,7 @@ class EmployeeRecord(Record):
 
         # Test tax relations & calculations accuracy
         assert ss_wage + ss_tip > ss_tax and abs((ss_wage + ss_tip) * Spec.SS_RATE_22 - ss_tax) < Spec.EPSILON, f'Error at row#{row_idx}: Social security tax is incorrect'
-        assert med_wage + ss_tip > med_tax and abs((med_wage + ss_tip) * Spec.MC_RATE_22 - med_tax) < Spec.EPSILON, f'Error at row#{row_idx}: Medicare tax is incorrect'
+        assert med_wage > med_tax and abs(med_wage * Spec.MC_RATE_22 - med_tax) < Spec.EPSILON, f'Error at row#{row_idx}: Medicare tax is incorrect'
 
     def fill(self):
         # extract indices of numeric fields
