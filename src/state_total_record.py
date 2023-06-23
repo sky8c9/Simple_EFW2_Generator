@@ -4,8 +4,8 @@ from record import Record
 from constants import Spec
 
 class StateTotalRecord(Record):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, input_file):
+        super().__init__(input_file)
         self.sheet = 'RV_RECORD'
 
     def fill(self):

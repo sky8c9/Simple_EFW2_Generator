@@ -3,8 +3,8 @@ import pandas as pd
 from record import Record
 
 class EmployerRecord(Record):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, input_file):
+        super().__init__(input_file)
         self.sheet = 'RE_RECORD'
 
         '''

@@ -4,8 +4,9 @@ from abc import abstractclassmethod
 from constants import Spec
 
 class Record():
-    def __init__(self):
+    def __init__(self, input_file):
         # define fields
+        self.input_file = input_file
         self.sheet = 'null'
         self.field_count = 0
         self.amount_loc = []
@@ -14,7 +15,7 @@ class Record():
 
     def initBlock(self):
         # read meta data from input sheet - record data has length of at least 1
-        data = pd.read_excel(f'../{Spec.SCHEMA}', sheet_name=self.sheet, dtype=str)
+        data = pd.read_excel(f'{Spec.IN}/{self.input_file}', sheet_name=self.sheet, dtype=str)
         self.column_name = list(data.head())
         
         # store meta data

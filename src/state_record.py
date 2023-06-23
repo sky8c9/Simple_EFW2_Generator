@@ -4,8 +4,8 @@ from employee_record import EmployeeRecord
 from constants import Spec
 
 class StateRecord(EmployeeRecord):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, input_file):
+        super().__init__(input_file)
         self.sheet = 'RS_RECORD'
         self.total = np.empty(0)
 

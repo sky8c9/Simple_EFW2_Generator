@@ -1,21 +1,19 @@
 class Spec:
+    # IO
+    IN = '../in'
+    OUT = '../out'
+    SUMMARY = '../summary'
+
     # Record attributes
-    SCHEMA = 'template.xlsx'
     SIZE = 512
     DATA_OFFSET = 1
     DATA_ROW_START = 3
 
-    # Tax rate & cap 2022
-    SS_RATE_22 = 0.062
-    SS_MAX_22 = 147000
-    MC_RATE_22 = 0.0145    
-    EPSILON = 0.1
-
-    # Total record
-    SUMMARY_FILE_OUT = 'Summary.csv'
-
-    # Efw2
-    EFW2_FILE_OUT = 'efw2.txt'
+    # Tax rate & cap 2023
+    SS_RATE = 0.062
+    SS_MAX = 160200
+    MC_RATE = 0.0145    
+    EPSILON = 0.2
 
 
   

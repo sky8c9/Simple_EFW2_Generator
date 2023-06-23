@@ -5,8 +5,8 @@ from employee_record import EmployeeRecord
 from constants import Spec
 
 class TotalRecord(Record):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, input_file):
+        super().__init__(input_file)
         self.sheet = 'RT_RECORD'
 
         # locations of amount values len & right justify
@@ -39,7 +39,9 @@ class TotalRecord(Record):
         # create summary report
         summary = pd.DataFrame(columns=total_titles)        
         summary.loc[len(summary)] = total_values
-        summary.to_csv(f'../{Spec.SUMMARY_FILE_OUT}', float_format='%.2f', index=False)
+
+        fname = 'sample' if self.input_file == None else self.input_file.split('.')[0]
+        summary.to_csv(f'{Spec.SUMMARY}/{fname}.CSV', float_format='%.2f', index=False)
 
 if __name__ == "__main__":
     # Quick test on total record class

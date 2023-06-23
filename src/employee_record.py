@@ -4,8 +4,8 @@ from record import Record
 from constants import Spec
 
 class EmployeeRecord(Record):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, input_file):
+        super().__init__(input_file)
         self.sheet = 'RW_RECORD'
         self.total = np.empty(0)
 
@@ -30,12 +30,12 @@ class EmployeeRecord(Record):
 
         # Test amount & cap
         assert fed_w <= earning, f'Error at row#{row_idx}: Federal tax withholding is greater earning'
-        assert ss_wage + ss_tip <= Spec.SS_MAX_22, f'Error at row#{row_idx}: Social wages + tip cant be greater than {Spec.SS_MAX_22}'
+        assert ss_wage + ss_tip <= Spec.SS_MAX, f'Error at row#{row_idx}: Social wages + tip cant be greater than {Spec.SS_MAX}'
         assert med_wage >= ss_wage, f'Error at row#{row_idx}: Medicare wages cant be smaller than Social security wages'
 
         # Test tax relations & calculations accuracy
-        assert ss_wage + ss_tip > ss_tax and abs((ss_wage + ss_tip) * Spec.SS_RATE_22 - ss_tax) < Spec.EPSILON, f'Error at row#{row_idx}: Social security tax is incorrect'
-        assert med_wage > med_tax and abs(med_wage * Spec.MC_RATE_22 - med_tax) < Spec.EPSILON, f'Error at row#{row_idx}: Medicare tax is incorrect'
+        assert ss_wage + ss_tip > ss_tax and abs((ss_wage + ss_tip) * Spec.SS_RATE - ss_tax) < Spec.EPSILON, f'Error at row#{row_idx}: Social security tax is incorrect'
+        assert med_wage > med_tax and abs(med_wage * Spec.MC_RATE - med_tax) < Spec.EPSILON, f'Error at row#{row_idx}: Medicare tax is incorrect'
 
     def fill(self):
         # extract indices of numeric fields

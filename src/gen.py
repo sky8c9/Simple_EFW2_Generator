@@ -1,5 +1,4 @@
-import numpy as np
-import pandas as pd
+import os
 from record import Record
 from submitter_record import SubmitterRecord
 from employer_record import EmployerRecord
@@ -14,12 +13,12 @@ class Report():
     def __init__(self):
         self.txt_chunks = []
         
-    def toTxt(self):
-        upload_txt = '\n'.join(self.txt_chunks)
-        upload_file = open(f'../{Spec.EFW2_FILE_OUT}', 'w')
-        upload_file.write(upload_txt)
-        upload_file.close()
-
+    def toTxt(self, fname):
+        txt = '\n'.join(self.txt_chunks)
+        fpath = os.path.join(Spec.OUT, f'{fname}_efw2.txt')
+        with open(fpath, 'w') as output:
+            output.write(txt)
+       
     def build(self, record:Record, rw_cnt=None, total=None):
         record.initBlock()
 
@@ -34,67 +33,84 @@ class Report():
         self.txt_chunks.append('\n'.join(record.lines))
 
     # a simple efw2 example with RA, RE, RW, RT & RF
-    def sample1(self):
+    def genSample1(self, file):
         # generate submitter record
-        submitter = SubmitterRecord()
+        submitter = SubmitterRecord(file)
         self.build(submitter)
 
         # generate employer record
-        employer = EmployerRecord()
+        employer = EmployerRecord(file)
         self.build(employer)
 
         # generate employee record
-        employee = EmployeeRecord()
+        employee = EmployeeRecord(file)
         self.build(employee)
 
         # generate total record & total summary
-        total = TotalRecord()
+        total = TotalRecord(file)
         self.build(total, employee.record_count, employee.total)
         total.totalSummary()
 
         # generate final record
-        fn = FinalRecord()
+        fn = FinalRecord(file)
         self.build(fn, employee.record_count)
 
         # combine records to a single txt file
-        self.toTxt()
+        fname = file.split('/')[-1].split('.')[0] 
+        self.toTxt(fname)
 
     # a simple efw2 example with RA, RE, RW, RS, RT, RV & RF
-    def sample2(self):
+    def genSample2(self, file):
         # generate submitter record
-        submitter = SubmitterRecord()
+        submitter = SubmitterRecord(file)
         self.build(submitter)
 
         # generate employer record
-        employer = EmployerRecord()
+        employer = EmployerRecord(file)
         self.build(employer)
 
         # generate employee record
-        employee = EmployeeRecord()
+        employee = EmployeeRecord(file)
         self.build(employee)
 
         # generate state record
-        employee_state = StateRecord()
+        employee_state = StateRecord(file)
         self.build(employee_state)
 
         # generate total record & total summary
-        total = TotalRecord()
+        total = TotalRecord(file)
         self.build(total, employee.record_count, employee.total)
         total.totalSummary()
 
         # generate state total record
-        state_total = StateTotalRecord()
+        state_total = StateTotalRecord(file)
         self.build(state_total)
 
         # generate final record
-        fn = FinalRecord()
+        fn = FinalRecord(file)
         self.build(fn, employee.record_count)
 
         # combine records to a single txt file
-        self.toTxt()
+        fname = file.split('/')[-1].split('.')[0] 
+        self.toTxt(fname)
+
+def run():
+    if not os.path.exists(Spec.IN):
+        os.makedirs(Spec.IN)
+
+    if not os.path.exists(Spec.OUT):
+        os.makedirs(Spec.OUT)
+
+    if not os.path.exists(Spec.SUMMARY):
+        os.makedirs(Spec.SUMMARY)
+
+    for file in os.listdir(Spec.IN):
+        if not file.startswith('.'):
+            report = Report()
+            report.genSample1(file)
 
 if __name__ == "__main__":
-    report = Report()
+    run()
+
     
-    #report.sample1()
-    report.sample2()
+  
