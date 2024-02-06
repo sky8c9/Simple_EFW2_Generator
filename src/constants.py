@@ -9,9 +9,11 @@ class Spec:
     DATA_OFFSET = 1
     DATA_ROW_START = 3
 
-    # Tax rate & cap 2023
+    # Correction record - TODO
+
+    # Tax rate & cap 2024
     SS_RATE = 0.062
-    SS_MAX = 160200
+    SS_MAX = 168600
     MC_RATE = 0.0145    
     EPSILON = 0.2
 
