@@ -14,7 +14,8 @@ class StateTotalRecord(Record):
 
 if __name__ == "__main__":
     # Quick test on state total record class
-    stateTotal = StateTotalRecord()
+    file_path = 'path to template file'
+    stateTotal = StateTotalRecord(file_path)
     stateTotal.initBlock()
     stateTotal.fill()
     stateTotal.mergeBlock()

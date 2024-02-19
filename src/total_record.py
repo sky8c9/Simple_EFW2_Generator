@@ -45,11 +45,12 @@ class TotalRecord(Record):
 
 if __name__ == "__main__":
     # Quick test on total record class
-    employee = EmployeeRecord()
+    file_path = 'path to template file'
+    employee = EmployeeRecord(file_path)
     employee.initBlock()
     employee.fill()
 
-    total = TotalRecord()
+    total = TotalRecord(file_path)
     total.initBlock()
     total.fill(employee.record_count, employee.total)
     total.mergeBlock()

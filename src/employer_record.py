@@ -23,7 +23,8 @@ class EmployerRecord(Record):
 
 if __name__ == "__main__":
     # Quick test on employer record class
-    employer = EmployerRecord()
+    file_path = 'path to template file'
+    employer = EmployerRecord(file_path)
     employer.initBlock()
     employer.fill()
     employer.mergeBlock()

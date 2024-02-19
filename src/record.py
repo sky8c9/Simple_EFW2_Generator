@@ -13,9 +13,9 @@ class Record():
         self.default_values = {}
         self.lines = []
 
-    def initBlock(self):
+    def initBlock(self, input_path=Spec.IN):
         # read meta data from input sheet - record data has length of at least 1
-        data = pd.read_excel(f'{Spec.IN}/{self.input_file}', sheet_name=self.sheet, dtype=str)
+        data = pd.read_excel(f'{input_path}/{self.input_file}', sheet_name=self.sheet, dtype=str)
         self.column_name = list(data.head())
         
         # store meta data
@@ -34,7 +34,7 @@ class Record():
                 self.blocks[i][j] = np.chararray(self.meta_data[0][j])
                 self.blocks[i][j][:] = ' '
 
-                # set numeric blocks with defined length & right justify
+                # set amount blocks with defined length & right justify - range [l, r] closed interval
                 for l,r in self.amount_loc:
                     if (j >= l and j <= r):
                         self.blocks[i][j] = np.chararray.zfill('', self.meta_data[0][j])
@@ -48,9 +48,9 @@ class Record():
     def fill(self):
         pass
 
-    def mergeBlock(self):
+    def mergeBlock(self, record_size=Spec.SIZE):
         # process each record block
         for i in range(self.record_count):
             sequence = ''.join(np.hstack(self.blocks[i]))
-            assert len(sequence) == Spec.SIZE, f'one of {self.sheet} length is not 512 bytes'
+            assert len(sequence) == record_size, f'one of {self.sheet} length is not matched desired length {record_size}'
             self.lines.append(sequence)

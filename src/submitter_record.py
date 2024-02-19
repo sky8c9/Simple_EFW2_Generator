@@ -22,7 +22,8 @@ class SubmitterRecord(Record):
 
 if __name__ == "__main__":
     # Quick test on submitter record class
-    submitter = SubmitterRecord()
+    file_path = 'path to template file'
+    submitter = SubmitterRecord(file_path)
     submitter.initBlock()
     submitter.fill()
     submitter.mergeBlock()

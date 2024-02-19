@@ -25,7 +25,8 @@ class StateRecord(EmployeeRecord):
 
 if __name__ == "__main__":
     # Quick test on state record class
-    state = StateRecord()
+    file_path = 'path to template file'
+    state = StateRecord(file_path)
     state.initBlock()
     state.fill()
     state.mergeBlock()

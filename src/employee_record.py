@@ -20,11 +20,15 @@ class EmployeeRecord(Record):
         '''
         self.default_values = {44:0, 46:0, 47:0}
 
+    def extract_box_1_7(self, data):
+        indices = np.arange(self.amount_loc[0][0], self.amount_loc[0][1] + 1, 1)
+        box_1_7 = np.take(data, indices).astype(float)
+        box_1_7 = np.nan_to_num(box_1_7, nan=0.00)
+        return box_1_7
+
     def simpleCheck(self, idx):
         # amount on box 1 to 7
-        indices = np.arange(self.amount_loc[0][0], self.amount_loc[0][1] + 1, 1)
-        box_1_7 = np.take(self.meta_data[idx + Spec.DATA_OFFSET], indices).astype(float)
-        box_1_7 = np.nan_to_num(box_1_7, nan=0.00)
+        box_1_7 = self.extract_box_1_7(self.meta_data[idx + Spec.DATA_OFFSET])
         earning, fed_w, ss_wage, ss_tax, med_wage, med_tax, ss_tip = box_1_7
         row_idx = idx + Spec.DATA_ROW_START
 
@@ -34,8 +38,8 @@ class EmployeeRecord(Record):
         assert med_wage >= ss_wage, f'Error at row#{row_idx}: Medicare wages cant be smaller than Social security wages'
 
         # Test tax relations & calculations accuracy
-        assert ss_wage + ss_tip > ss_tax and abs(min(Spec.SS_MAX, ss_wage + ss_tip) * Spec.SS_RATE - ss_tax) < Spec.EPSILON, f'Error at row#{row_idx}: Social security tax is incorrect'
-        assert med_wage > med_tax and abs(med_wage * Spec.MC_RATE - med_tax) < Spec.EPSILON, f'Error at row#{row_idx}: Medicare tax is incorrect'
+        assert abs(min(Spec.SS_MAX, ss_wage + ss_tip) * Spec.SS_RATE - ss_tax) < Spec.EPSILON, f'Error at row#{row_idx}: Social security tax is incorrect'
+        assert abs(med_wage * Spec.MC_RATE - med_tax) < Spec.EPSILON, f'Error at row#{row_idx}: Medicare tax is incorrect'
 
     def fill(self):
         # extract indices of numeric fields
@@ -66,7 +70,7 @@ class EmployeeRecord(Record):
                 assert amount >= 0, f'Error at row#{i + Spec.DATA_ROW_START}: Amount is negative at column {self.column_name[j]}'
 
                 # set amount value & add to total
-                amount = np.longlong(amount * 100)
+                amount = np.longlong(round(amount * 100, 0))
                 self.blocks[i][j] = np.chararray.rjust(str(amount), self.meta_data[0][j], fillchar='0')
                 self.total[j] += amount
 
@@ -75,7 +79,8 @@ class EmployeeRecord(Record):
 
 if __name__ == "__main__":
     # Quick test on employee record class
-    employee = EmployeeRecord()
+    file_path = 'path to template file'
+    employee = EmployeeRecord(file_path)
     employee.initBlock()
     employee.fill()
     employee.mergeBlock()

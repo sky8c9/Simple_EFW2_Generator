@@ -15,7 +15,8 @@ class FinalRecord(Record):
 
 if __name__ == "__main__":
     # Quick test on final record class
-    fn = FinalRecord()
+    file_path = 'path to template file'
+    fn = FinalRecord(file_path)
     fn.initBlock()
     fn.fill(12345)
     fn.mergeBlock()
