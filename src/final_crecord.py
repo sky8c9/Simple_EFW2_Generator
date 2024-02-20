@@ -14,8 +14,8 @@ class FinalCRecord(FinalRecord):
         self.blocks[0][1] = np.chararray.rjust(str(rw_cnt), self.meta_data[0][1], fillchar='0')        
 
 if __name__ == "__main__":
-    # Quick test on final record class
-    file_path = 'path to template file'
+    # Quick test on corrected final record class
+    file_path = 'path to correction template file'
     fn = FinalCRecord(file_path)
     fn.initBlock()
     fn.fill(12345)

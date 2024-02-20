@@ -10,7 +10,7 @@ class SubmitterCRecord(SubmitterRecord):
         self.default_values = {}
 
 if __name__ == "__main__":
-    # Quick test on submitter record class
+    # Quick test on corrected submitter record class
     file_path = 'path to correction template file'
     submitter = SubmitterCRecord(file_path)
     submitter.initBlock()

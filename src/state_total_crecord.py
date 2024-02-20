@@ -13,7 +13,7 @@ class StateTotalCRecord(StateTotalRecord):
         self.blocks[0][0] = np.chararray.ljust('RCV', self.meta_data[0][0])
 
 if __name__ == "__main__":
-    # Quick test on state total record class
+    # Quick test on corrected state total record class
     file_path = 'path to correction template file'
     stateTotal = StateTotalCRecord(file_path)
     stateTotal.initBlock()

@@ -5,13 +5,13 @@ from employee_crecord import EmployeeCRecord
 from constants import Spec
 
 class TotalCRecord(TotalRecord):
-    def __init__(self, input_file=f'../Correction_Template/ABC_template_correction.xlsx'):
+    def __init__(self, input_file):
         super().__init__(input_file)
         self.sheet = 'RCT_RECORD'
-
-        # locations of amount values len & right justify
         self.total_block_size = 15
         self.amount_loc = []
+
+        # rcw to rct mapping
         self.rcw2rct_mapping = [[19,33, 2,16], [34,48, 17,31], [49,57, 32,40], [58,72, 41,55]]
 
     def fill(self, rw_cnt, total_record):
@@ -26,7 +26,7 @@ class TotalCRecord(TotalRecord):
             np.put(self.blocks[0], np.arange(rctL, rctR), [total_blocks])
 
 if __name__ == "__main__":
-    # Quick test on total record class
+    # Quick test on corrected total record class
     file_path = 'path to correction template file'
     employee = EmployeeCRecord(file_path)
     employee.initBlock()

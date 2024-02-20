@@ -22,7 +22,7 @@ class EmployeeCRecord(EmployeeRecord):
         return box_1_7
 
 if __name__ == "__main__":
-    # Quick test on employee record class
+    # Quick test on corrected employee record class
     file_path = 'path to correction template file'
     employee = EmployeeCRecord(file_path)
     employee.initBlock()

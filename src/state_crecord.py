@@ -18,7 +18,7 @@ class StateCRecord(EmployeeRecord):
         pass
 
 if __name__ == "__main__":
-    # Quick test on state record class
+    # Quick test on corrected state record class
     file_path = 'path to correction template file'
     state = StateCRecord(file_path)
     state.initBlock()

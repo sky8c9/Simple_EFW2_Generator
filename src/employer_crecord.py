@@ -10,7 +10,7 @@ class EmployerCRecord(EmployerRecord):
         self.default_values = {}
 
 if __name__ == "__main__":
-    # Quick test on employer record class
+    # Quick test on corrected employer record class
     file_path = 'path to correction template file'
     employer = EmployerCRecord(file_path)
     employer.initBlock(Spec.CIN)
