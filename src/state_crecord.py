@@ -23,4 +23,4 @@ if __name__ == "__main__":
     state = StateCRecord(file_path)
     state.initBlock()
     state.fill()
-    state.mergeBlock(Spec.SIZE)
+    state.mergeBlock(Spec.CSIZE)
