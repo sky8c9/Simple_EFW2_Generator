@@ -1,6 +1,6 @@
 class Spec:
     # Template
-    TEMPLATE_PATH = '../template'
+    TEMPLATE_FILE = '../template/template_correction.xlsx'
     TEMPLATE_WRITE_OFFSET = 2
 
     # RRecord
