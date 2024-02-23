@@ -12,7 +12,7 @@ class TotalCRecord(TotalRecord):
         self.amount_loc = []
 
         # rcw to rct mapping
-        self.rcw2rct_mapping = [[19,33, 2,16], [34,48, 17,31], [49,57, 32,40], [58,72, 41,55]]
+        self.rcw2rct_mapping = [[19,33, 2,16], [34,46, 17,29], [49,57, 32,40], [58,72, 41,55]]
 
     def fill(self, rw_cnt, total_record):
         # set id at block#0 and total record count at block#1

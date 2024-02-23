@@ -24,7 +24,7 @@ class Spec:
 
 class CRecord_Mapping:
     '''
-    # mapping locations to correction record
+    # mapping locations from source record to correction record
         [sl,sr,sd, tl,tr,td]
         [sl, sr): moving at rate sd
         [tr, td): moving at rate td
@@ -34,7 +34,7 @@ class CRecord_Mapping:
 
     RCE = [[1,2,1, 1,2,1], [2,3,1, 4,5,1], [3,4,1, 3,4,1], 
            [4,5,1, 5,6,1], [6,7,1, 6,7,1], [8,15,1, 8,15,1], 
-           [15,16,1, 24,25,1], [17,21,1, 16,20,1], 
+           [15,16,1, 24,25,1], [17,20,1, 16,19,1], 
            [22,23,1, 21,22,1], [23,28,1, 25,30,1]]
     
     RCW = [[1,2,1, 1,2,1], [2,5,1, 3,6,1], [6,12,1, 9,15,1],

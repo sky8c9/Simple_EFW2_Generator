@@ -7,7 +7,12 @@ class SubmitterCRecord(SubmitterRecord):
     def __init__(self, input_file):
         super().__init__(input_file)
         self.sheet = 'RCA_RECORD'
-        self.default_values = {}
+
+        '''
+        Default settings:
+            + Resub indicator = 0
+        '''
+        self.default_values = {26:0}
 
 if __name__ == "__main__":
     # Quick test on corrected submitter record class

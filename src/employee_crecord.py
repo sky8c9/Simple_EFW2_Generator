@@ -9,7 +9,7 @@ class EmployeeCRecord(EmployeeRecord):
         self.sheet = 'RCW_RECORD'
         
         # locations of amount values with len & right justify
-        self.amount_loc = [[19, 32], [34, 47], [49, 56], [58, 71]]
+        self.amount_loc = [[19, 32], [34, 45], [49, 56], [58, 71]]
 
         # default values
         self.default_values = {}
